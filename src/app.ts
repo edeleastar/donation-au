@@ -1,8 +1,14 @@
+export interface Candidate {
+  firstName: string;
+  lastName: string;
+  office: string;
+}
+
 export class App {
   firstName: string;
   lastName: string;
   office: string;
-  candidates: any[] = [];
+  candidates: Candidate[] = [];
 
   addCandidate() {
     const candidate = {
