@@ -1,4 +1,6 @@
 <template>
+  <require from="../resources/elements/donations-list"></require>
+
   <div class="ui stackable two column grid">
     <div class="column">
       <form submit.trigger="makeDonation()" class="ui form stacked segment">
@@ -12,21 +14,7 @@
       </form>
     </div>
     <div class="column">
-      <div class="ui stacked segment">
-        <h3 class="ui dividing header"> Donations to Date </h3>
-        <table class="ui celled table segment">
-          <thead>
-            <tr>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr repeat.for="donation of donations">
-              <td> ${donation}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <donations-list donations.bind="donations"></donations-list>
     </div>
   </div>
 </template>
