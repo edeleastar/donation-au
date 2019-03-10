@@ -1,4 +1,6 @@
 <template>
+  <require from="../resources/elements/candidate-list"></require>
+  
   <div class="ui stackable two column grid">
     <div class="column">
       <form submit.trigger="addCandidate()" class="ui form stacked segment">
@@ -16,28 +18,7 @@
       </form>
     </div>
     <div class="column">
-      <h4 class="ui dividing header"> Candidates </h4>
-      <table class="ui celled table segment">
-        <thead>
-          <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Office</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr repeat.for="candidate of candidates">
-            <td>
-              ${candidate.lastName}
-            <td>
-              ${candidate.firstName}
-            </td>
-            <td>
-              ${candidate.office}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <candidate-list candidates.bind="candidates"></candidate-list>
     </div>
   </div>
 </template>
