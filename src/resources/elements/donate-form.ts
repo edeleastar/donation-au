@@ -12,11 +12,13 @@ export class DonateForm {
   candidates: Candidate[];
 
   selectedMethod = '';
+  selectedCandidate : Candidate = null;
 
   makeDonation() {
     const donation = {
       amount: parseInt(this.amount),
-      method: this.selectedMethod
+      method: this.selectedMethod,
+      candidate: this.selectedCandidate
     };
     this.donations.push(donation);
     console.log(this.donations);
