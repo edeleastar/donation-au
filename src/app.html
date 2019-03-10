@@ -30,7 +30,19 @@
                 <th>Office</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              <tr repeat.for="candidate of candidates">
+                <td>
+                  ${candidate.lastName}
+                <td>
+                  ${candidate.firstName}
+                </td>
+                <td>
+                  ${candidate.office}
+                </td>
+              </tr>
+            </tbody>
+            </tbody>
           </table>
         </div>
       </div>
