@@ -1,8 +1,4 @@
-export interface Candidate {
-  firstName: string;
-  lastName: string;
-  office: string;
-}
+import {Candidate} from "./services/donation-types";
 
 export class App {
   firstName: string;
