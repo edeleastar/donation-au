@@ -1,7 +1,9 @@
 export class Donate {
-  amount = 0;
+  amount = '0';
+  donations: number[] = [];
 
   makeDonation() {
-    console.log(this.amount);
+    this.donations.push(parseInt(this.amount));
+    console.log(this.donations);
   }
 }
