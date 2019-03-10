@@ -4,8 +4,8 @@ import { DonationService } from '../services/donation-service';
 
 @inject(DonationService)
 export class Donate {
-  donations: Donation[] = [];
-  paymentMethods = ['Cash', 'Paypal'];
+  donations: Donation[];
+  paymentMethods: string[];
   candidates: Candidate[];
 
   constructor(private ds: DonationService) {

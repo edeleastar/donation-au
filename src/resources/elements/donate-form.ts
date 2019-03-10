@@ -2,15 +2,14 @@ import { bindable } from 'aurelia-framework';
 import { Candidate, Donation } from '../../services/donation-types';
 
 export class DonateForm {
-  amount = '0';
   @bindable
   donations: Donation[] = [];
   @bindable
   paymentMethods: string[];
-
   @bindable
   candidates: Candidate[];
 
+  amount = '0';
   selectedMethod = '';
   selectedCandidate : Candidate = null;
 
