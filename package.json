@@ -103,6 +103,10 @@
       "html"
     ]
   },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120
+  },
   "engines": {
     "node": ">= 6.0.0"
   },
