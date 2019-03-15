@@ -10,3 +10,11 @@ export interface Donation {
   candidate: Candidate;
 }
 
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+
