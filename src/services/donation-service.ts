@@ -1,10 +1,10 @@
-import { inject, Aurelia } from 'aurelia-framework';
-import { Router } from 'aurelia-router';
-import { PLATFORM } from 'aurelia-pal';
-import { Candidate, Donation, User } from './donation-types';
-import { HttpClient } from 'aurelia-http-client';
-import { EventAggregator } from 'aurelia-event-aggregator';
-import { TotalUpdate } from './messages';
+import {inject, Aurelia} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
+import {PLATFORM} from 'aurelia-pal';
+import {Candidate, Donation, User} from './donation-types';
+import {HttpClient} from 'aurelia-http-client';
+import {EventAggregator} from 'aurelia-event-aggregator';
+import {TotalUpdate} from './messages';
 
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class DonationService {
@@ -53,15 +53,21 @@ export class DonationService {
   }
 
   async login(email: string, password: string) {
-    this.changeRouter(PLATFORM.moduleName('app'))
+    const user = this.users.get(email);
+    if (user && (user.password === password)) {
+      this.changeRouter(PLATFORM.moduleName('app'))
+      return true;
+    } else {
+      return false;
+    }
   }
 
   logout() {
     this.changeRouter(PLATFORM.moduleName('start'))
   }
 
-  changeRouter(module:string) {
-    this.router.navigate('/', { replace: true, trigger: false });
+  changeRouter(module: string) {
+    this.router.navigate('/', {replace: true, trigger: false});
     this.router.reset();
     this.au.setRoot(PLATFORM.moduleName(module));
   }
