@@ -14,7 +14,7 @@ export class Start {
         title: 'Login'
       },
       {
-        route: 'singup',
+        route: 'signup',
         name: 'signup',
         moduleId: PLATFORM.moduleName('views/signup'),
         nav: true,
