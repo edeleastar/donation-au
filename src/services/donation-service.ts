@@ -45,4 +45,10 @@ export class DonationService {
     this.ea.publish(new TotalUpdate(this.total));
     console.log('Total so far ' + this.total);
   }
+
+  signup(firstName: string, lastName: string, email: string, password: string) {}
+
+  login(email: string, password: string) {}
+
+  logout() {}
 }
