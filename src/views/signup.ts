@@ -7,11 +7,15 @@ export class Signup {
   lastName = 'Simpson';
   email = 'marge@simpson.com';
   password = 'secret';
+  prompt = '';
 
   constructor(private ds: DonationService) {}
 
   signup(e) {
     console.log(`Trying to sign up ${this.email}`);
-    this.ds.signup(this.firstName, this.lastName, this.email, this.password);
+    const success = this.ds.signup(this.firstName, this.lastName, this.email, this.password);
+    if (!success) {
+      this.prompt = 'Oops! Try again...';
+    }
   }
 }
