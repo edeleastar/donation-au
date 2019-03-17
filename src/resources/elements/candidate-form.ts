@@ -12,7 +12,8 @@ export class CandidateForm {
     const candidate = {
       firstName: this.firstName,
       lastName: this.lastName,
-      office: this.office
+      office: this.office,
+      _id: ''
     };
     this.candidates.push(candidate);
     console.log(candidate);
