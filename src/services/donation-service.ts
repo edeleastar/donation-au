@@ -1,10 +1,10 @@
-import {inject, Aurelia} from 'aurelia-framework';
-import {Router} from 'aurelia-router';
-import {PLATFORM} from 'aurelia-pal';
-import {Candidate, Donation, RawDonation, User} from './donation-types';
-import {HttpClient} from 'aurelia-http-client';
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {TotalUpdate} from './messages';
+import { inject, Aurelia } from 'aurelia-framework';
+import { Router } from 'aurelia-router';
+import { PLATFORM } from 'aurelia-pal';
+import { Candidate, Donation, RawDonation, User } from './donation-types';
+import { HttpClient } from 'aurelia-http-client';
+import { EventAggregator } from 'aurelia-event-aggregator';
+import { TotalUpdate } from './messages';
 
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class DonationService {
@@ -14,7 +14,12 @@ export class DonationService {
   paymentMethods = ['Cash', 'Paypal'];
   total = 0;
 
-  constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
+  constructor(
+    private httpClient: HttpClient,
+    private ea: EventAggregator,
+    private au: Aurelia,
+    private router: Router
+  ) {
     httpClient.configure(http => {
       http.withBaseUrl('http://localhost:3000');
     });
@@ -43,11 +48,22 @@ export class DonationService {
     rawDonations.forEach(rawDonation => {
       const donation = {
         amount: rawDonation.amount,
-        method : rawDonation.method,
-        candidate :this.candidates.find(candidate => rawDonation.candidate == candidate._id),
-      }
+        method: rawDonation.method,
+        candidate: this.candidates.find(candidate => rawDonation.candidate == candidate._id)
+      };
       this.donations.push(donation);
     });
+  }
+
+  async createCandidate(firstName: string, lastName: string, office: string) {
+    const candidate = {
+      firstName: firstName,
+      lastName: lastName,
+      office: office
+    };
+    const response = await this.httpClient.post('/api/candidates', candidate);
+    const newCandidate = await response.content;
+    this.candidates.push(newCandidate);
   }
 
   async donate(amount: number, method: string, candidate: Candidate) {
@@ -70,8 +86,8 @@ export class DonationService {
 
   async login(email: string, password: string) {
     const user = this.users.get(email);
-    if (user && (user.password === password)) {
-      this.changeRouter(PLATFORM.moduleName('app'))
+    if (user && user.password === password) {
+      this.changeRouter(PLATFORM.moduleName('app'));
       return true;
     } else {
       return false;
@@ -79,11 +95,11 @@ export class DonationService {
   }
 
   logout() {
-    this.changeRouter(PLATFORM.moduleName('start'))
+    this.changeRouter(PLATFORM.moduleName('start'));
   }
 
   changeRouter(module: string) {
-    this.router.navigate('/', {replace: true, trigger: false});
+    this.router.navigate('/', { replace: true, trigger: false });
     this.router.reset();
     this.au.setRoot(PLATFORM.moduleName(module));
   }
