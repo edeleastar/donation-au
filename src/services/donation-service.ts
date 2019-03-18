@@ -24,9 +24,6 @@ export class DonationService {
     httpClient.configure(http => {
       http.withBaseUrl('http://localhost:3000');
     });
-    this.getCandidates();
-    this.getUsers();
-    this.getDonations();
   }
 
   async getCandidates() {
@@ -93,13 +90,23 @@ export class DonationService {
     const newUser = await response.content;
     this.users.set(newUser.email, newUser);
     this.usersById.set(newUser._id, newUser);
-    this.changeRouter(PLATFORM.moduleName('app'))
+    this.changeRouter(PLATFORM.moduleName('app'));
     return false;
   }
 
   async login(email: string, password: string) {
-    const user = this.users.get(email);
-    if (user && user.password === password) {
+    const response = await this.httpClient.post('/api/users/authenticate', {
+      email: email,
+      password: password
+    });
+    const status = await response.content;
+    if (status.success) {
+      this.httpClient.configure(configuration => {
+        configuration.withHeader('Authorization', 'bearer ' + status.token);
+      });
+      await this.getCandidates();
+      await this.getUsers();
+      await this.getDonations();
       this.changeRouter(PLATFORM.moduleName('app'));
       return true;
     } else {
@@ -108,6 +115,9 @@ export class DonationService {
   }
 
   logout() {
+    this.httpClient.configure(configuration => {
+      configuration.withHeader('Authorization', '');
+    });
     this.changeRouter(PLATFORM.moduleName('start'));
   }
 
