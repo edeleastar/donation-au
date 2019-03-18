@@ -9,6 +9,7 @@ import { TotalUpdate } from './messages';
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class DonationService {
   users: Map<string, User> = new Map();
+  usersById: Map<string, User> = new Map();
   candidates: Candidate[] = [];
   donations: Donation[] = [];
   paymentMethods = ['Cash', 'Paypal'];
@@ -39,6 +40,7 @@ export class DonationService {
     const users = await response.content;
     users.forEach(user => {
       this.users.set(user.email, user);
+      this.usersById.set(user._id, user);
     });
   }
 
@@ -49,7 +51,8 @@ export class DonationService {
       const donation = {
         amount: rawDonation.amount,
         method: rawDonation.method,
-        candidate: this.candidates.find(candidate => rawDonation.candidate == candidate._id)
+        candidate: this.candidates.find(candidate => rawDonation.candidate == candidate._id),
+        donor: this.usersById.get(rawDonation.donor)
       };
       this.donations.push(donation);
     });
