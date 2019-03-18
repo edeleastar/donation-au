@@ -23,6 +23,7 @@ export interface User {
   lastName: string;
   email: string;
   password: string;
+  _id: string;
 }
 
 
