@@ -5,13 +5,6 @@ export interface Candidate {
   _id : string;
 }
 
-export interface RawDonation {
-  amount: number;
-  method: string;
-  candidate: string;
-  donor: string;
-}
-
 export interface Donation {
   amount: number;
   method: string;
