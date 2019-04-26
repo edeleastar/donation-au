@@ -21,8 +21,7 @@ export class DonationMap {
       const donationStr = `${donation.candidate.firstName} ${
         donation.candidate.lastName
       } £${donation.amount.toString()}`;
-      this.map.addMarker(donation.location);
-      this.map.addMarker(donation.location);
+      this.map.addMarker(donation.location, `${donation.candidate.firstName} ${donation.candidate.lastName} : €${donation.amount}`);
       this.map.moveTo(12, donation.location);
     }
   }
@@ -34,5 +33,6 @@ export class DonationMap {
       minZoom: 7
     };
     this.map = new LeafletMap(this.mapId, mapConfig, 'Terrain');
+    this.map.showZoomControl();
   }
 }
