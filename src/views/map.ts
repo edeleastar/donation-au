@@ -10,6 +10,13 @@ export class Map {
 
   constructor(private ds: DonationService) {}
 
+  renderDonations() {
+    for (let donation of this.ds.donations) {
+      const donationStr = `${donation.candidate.firstName} ${donation.candidate.lastName} €${donation.amount.toString()}`;
+      this.map.addMarker(donation.location, donationStr, 'Donations');
+    }
+  }
+
   attached() {
     const mapConfig = {
       location: { lat: 53.2734, lng: -7.7783203 },
@@ -18,6 +25,8 @@ export class Map {
     };
     this.map = new LeafletMap(this.mapId, mapConfig, 'Terrain');
     this.map.showZoomControl();
+    this.map.addLayerGroup('Donations');
     this.map.showLayerControl();
+    this.renderDonations();
   }
 }
