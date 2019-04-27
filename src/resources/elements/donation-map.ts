@@ -18,10 +18,8 @@ export class DonationMap {
 
   renderDonation(donation: Donation) {
     if (this.map) {
-      const donationStr = `${donation.candidate.firstName} ${
-        donation.candidate.lastName
-      } £${donation.amount.toString()}`;
-      this.map.addMarker(donation.location, `${donation.candidate.firstName} ${donation.candidate.lastName} : €${donation.amount}`);
+      const donationStr = `${donation.candidate.firstName} ${donation.candidate.lastName} €${donation.amount.toString()}`;
+      this.map.addMarker(donation.location, donationStr);
       this.map.moveTo(12, donation.location);
     }
   }
