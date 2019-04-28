@@ -15,8 +15,26 @@ export interface MapConfig {
 export class LeafletMap {
   imap: Map;
   control: LayerControl;
-  overlays: LayersObject = {};
-
+  overlays = {
+    Wind: L.tileLayer('http://{s}.tile.openweathermap.org/map/wind/{z}/{x}/{y}.png?appid={apiKey}', {
+      maxZoom: 19,
+      attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+      apiKey: 'YOURAPIKEY',
+      opacity: 0.5
+    }),
+    Clouds: L.tileLayer('http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png?appid={apiKey}', {
+      maxZoom: 19,
+      attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+      apiKey: 'YOURAPIKEY',
+      opacity: 0.5
+    }),
+    Pressure: L.tileLayer('http://{s}.tile.openweathermap.org/map/pressure/{z}/{x}/{y}.png?appid={apiKey}', {
+      maxZoom: 19,
+      attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+      apiKey: 'YOURAPIKEY',
+      opacity: 0.5
+    })
+  };
   // https://leaflet-extras.github.io/leaflet-providers/preview/
 
   baseLayers = {
@@ -30,7 +48,8 @@ export class LeafletMap {
       {
         attribution:
           'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-      })
+      }
+    )
   };
 
   constructor(id: string, descriptor: MapConfig, activeLayer = '') {
